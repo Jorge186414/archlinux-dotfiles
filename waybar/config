@@ -1,0 +1,197 @@
+// Most of the modules and configurations are from the base dotfile
+// If you want all of the original copy with the following command
+// cp /etc/xdg/waybar/config.jsonc ~/.config/waybar
+
+{
+    "layer": "top",
+    "margin-top": 6,
+    "margin-left": 10,
+    "margin-right":10,
+    "height": 30,
+    "spacing": 6,
+    
+    ///////////////////
+    ///Modules Order//
+    /////////////////
+    
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+
+    "modules-center": [
+        "mpris#spotify"
+    ],
+
+    "modules-right": [
+	"clock",
+	"pulseaudio",
+        "backlight",
+        "power-profiles-daemon",
+        "network",
+        "bluetooth",
+        "battery",
+	"custom/power",
+        "tray",
+    ],
+
+    ///////////////////////////
+    // Modules Configuration//
+    /////////////////////////
+
+
+    "mpris#chromium": {
+        "player": "chromium",
+        "format": "{player_icon} {artist}: {title}",
+        "format-stopped": "",
+	"player-icons": {
+		"chromium": " "
+        },
+
+        "status-icons":{
+            "paused": " ",
+            "playing": " "
+        }
+    },
+
+
+    "mpris#spotify": {
+        "player": "spotify",
+        "format": "{player_icon} {artist}: {title} - {album} - {status_icon} {position}",
+        "format-paused": "{player_icon} {title} - {status_icon} {position}",
+        "tooltip-format": "{player_icon} {artist}: {title}",
+        "interval": 1,
+        "max-length": 90,
+        "player-icons": {
+                "spotify": " ",
+        },
+
+        "status-icons":{
+            "paused": " ",
+            "playing": " "
+        }
+    },
+
+    "backlight": {
+    "device": "intel_backlight",
+    "format": "{percent}% {icon}",
+    "format-icons": ["󰃞", "󰃠"]
+    },
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "warp-on-scroll": false,
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+        },
+        "format": "{icon}",
+        "format-icons": {
+            "active": "<span font='12'>󰮯</span>",
+            "empty": "<span font='8'></span>",
+            "persistent": "󰊠",
+        }
+    }, // End hyprland/workspaces module
+
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    }, // End clock module
+
+    "power-profiles-daemon": {
+         "format": "{icon}",
+         "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+         "tooltip": true,
+         "format-icons": {
+             "default": "",
+             "performance": "",
+             "balanced": "",
+             "power-saver": ""
+         }
+    }, // End power-profiles-daemon module
+
+    "network": {
+	"format-wifi": "<span color='#9ece6a'> </span> {bandwidthDownBytes}",
+	"format-ethernet": "<span color='#7aa2f7'></span> {bandwidthDownBytes}",
+	"format-disconnected": "<span color='#FF0000'>󰌙 </span>",
+        "interval": 2,
+    }, // End of network format
+
+    "custom/power": {
+        "format" : "⏻ ",
+	"tooltip": false,
+        "on-click": "wlogout"
+    }, // Enf of custom/power module
+
+   "bluetooth": {
+       // "controller": "hci0",
+       "format": "󰂯{status}", // Ícono + estado ("enabled", "disabled", "on", "off", etc.)
+       "format-connected": "󰂱 {num_connections}",
+       "format-disabled": "", 
+       "tooltip-format": "{controller_alias}\n{controller_address}",
+       "tooltip-format-connected": "{controller_alias}\n{controller_address}\n\n{device_enumerate}",
+       "tooltip-format-enumerate-connected": "{device_alias} ({device_address})",
+       "on-click": "blueman-manager"
+   },
+
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% 9",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "tray": {
+        "spacing": 10,
+        "icons": {
+            "blueman": "bluetooth",
+        }
+    }, // End of tray module
+
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " ",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    }, // End of pulseaudio module
+
+    "cpu": {
+        "interval": 15,
+        "format": "<span color='#8fd3ff'></span> {} %",
+    }, // End of cpu module
+
+    "memory": {
+        "interval": 30,
+        "format": "<span color='#80ff53'></span> {used}GB",
+        "format-alt": "<span color='#80ff53'></span> {used}GB/{total}GB",
+   }, // End of memory module
+
+    "disk": {
+        "format": "<span color='#d08fff'> </span> {percentage_used}%",
+        "format-alt": "<span color='#d08fff'> </span> {used} ",
+        "interval": 30,
+   }, // End of disk module
+}
