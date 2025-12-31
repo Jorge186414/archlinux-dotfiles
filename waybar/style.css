@@ -6,10 +6,6 @@
     font-size: 14px;
 }
 
-window {
-
-}
-
 window#waybar {
     background-color: rgba(20, 44, 87, 1.0);
     color: #daefff;
