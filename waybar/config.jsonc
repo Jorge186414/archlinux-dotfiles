@@ -1,32 +1,27 @@
 // -*- mode: jsonc -*-
 {
     "layer": "top",
-    "position": "bottom",
+    "position": "top",
     "height": 30,
-    "spacing": 4, // Gaps between modules (4px)
     "reload_style_on_change": true,
     "margin-bottom": 5,
     "margin-left": 5,
     "margin-right": 5,
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces", "mpris"],
-    "modules-center": ["clock"],
+    "modules-center": [],
     "modules-right":[
         "custom/notification",
-		"idle_inhibitor",
-        "network",
-		"bluetooth",
-		"backlight",
-		"wireplumber",
-        "clock#time",
-		"power-profiles-daemon",
-		"battery"
-    ],
+        "network", "bluetooth",
+		"backlight", "wireplumber",
+        "clock",
+		"power-profiles-daemon", "battery", "custom/power"
+        ],
 
     "hyprland/workspaces": {
         "disable-scroll": true,
-        "all-outputs": true,
         "warp-on-scroll": false,
+        "all-outputs": true,
         "persistent-workspaces": {
             "1": [],
             "2": [],
@@ -35,96 +30,90 @@
             "5": []
         },
         "format": "{icon}",
+        "on-click": "activate",
         "format-icons": {
-            "active": "<span font='12'>󰮯</span>",
-            "empty": "<span font='8'></span>",
-            "persistent": "󰮯"
-        }
-    }, // End hyprland/workspaces module
+        "default": "󰫣",
+        "active": "󰫢"
+		}
+	}, // End hyprland/workspaces module
 
     "mpris": {
-        "format": "<span color='#25be6a'>{player_icon}</span> {artist} - {title}",
-        "format-paused": "<span color='#25be6a'>{player_icon}</span> {artist} - {title}",
-        "tooltip-format": "{player_icon} {artist} - {title} - {position}",
+        "format": "{player_icon}{artist} - {title}",
+        "format-paused": "{player_icon}{artist} - {title}",
+        "tooltip-format": "{player_icon}{artist} - {title} - {position}",
         "interval": 1,
-        "max-length": 90,
+        "max-length": 40,
         "player-icons": {
             "spotify": " "
         }
     }, // End of custom/mpris module
 
-    "clock": {
-		"format": "<span color='#ee5396'></span>  {:%A %e %B}"
-	},
-
     "custom/notification":{
         "format": "󱅫",
-        "on-click": "swaync-client -t -sw"
-    },
-
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        },
-        "tooltip": "true"
+        "on-click": "swaync-client -t -sw",
+        "tooltip" :false
     },
 
     "network": {
-        "format-wifi": "󰤢",
-        "format-ethernet": "󰈀 ",
-        "format-disconnected": "󰤠 ",
-        "interval": 5,
-        "tooltip-format": "{essid} ({signalStrength}%)",
-        "on-click": "nmgui"
+		"format-wifi": " {essid}",
+		"format-ethernet": "{ipaddr}/{cidr}",
+		"format-linked": "{ifname} (No IP)",
+		"format-disconnected": "󰖪",
+        "on-click": "exec ~/.config/rofi/assets/wifimenu --rofi -s",
+        "tooltip-format":"Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signalStrength}%</b>\nInterface: <b>{ifname}</b>"	
     },
 
-    "bluetooth":{
-        "format": "<span color='#74c7ec'></span>",
-        "format-on": "<span color='#74c7ec'></span>",
-        "format-off": "<span color='#f38ba8'></span>",
-        "format-disabled": "<span color='#f38ba8'></span>",
-        "format-connected": "<span color='#74c7ec'></span>",
-        "on-click":"blueman-manager &"
-    },
+    "bluetooth": {
+		"format": "",
+		"format-disabled": "󰂲",
+		"format-connected": "󰂱",
+		"on-click": "blueman-manager &"
+	},
 
     "backlight": {
         "device": "intel_backlight",
-		"format": "<span color='#8ccf7e'>󱩖 </span>  {percent}%   ",
+		"format": "󱩖 {percent}%",
         "format-icons": ["󰃞", "󰃠"],
         "tooltip" :false
     },
 
     "wireplumber": {
         "on-click": "pavucontrol",
-        "format": "<span foreground='#cba6f7'>{icon}</span>{volume}%",
-        "format-muted": "<span foreground='#f38ba8'></span>Muted",
-        "tooltip" :false,
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟",
         "format-icons": {
-            "headphone": " ",
+            "headphone": "",
             "hands-free": " ",
-            "headset": " ",
-            "phone": " ",
+            "headset": "",
+            "phone": "",
             "portable": " ",
             "car": " ",
             "default": [" ", " ", " "]
-        }
+        },
+        "tooltip" :false
     },
 
-    "clock#time": {
-		"format": "<span color='#e57474'></span>  {:%H:%M}"
-	},
+    "clock": {
+        "format": "󰥔 {:%H:%M   %d %B}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"calendar": {
+			"format": {
+				"months": "<span color='#ffead3'><b>{}</b></span>",
+				"weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+				"today": "<span color='#ffcc66'><b><u>{}</u></b></span>"
+			}
+		}
+    },
 
     "power-profiles-daemon": {
         "format": "{icon}",
-        "tooltip": false,
         "format-icons": {
-            "default": "",
-            "performance": "",
+            "default": "󱐋",
+            "performance": "󱐋",
             "balanced": "",
-            "power-saver": ""
-        }
+            "power-saver": ""
+        },
+        "tooltip": false
     },
 
     "battery": {
@@ -134,15 +123,15 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "<span color='#8ccf7e'>{icon}</span>   {capacity}%",
-        "format-charging": "<span color='#8ccf7e'></span>  {capacity}%",
-        "format-plugged": "<span color='#8ccf7e'></span>  {capacity}%",
-        "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            ""
-        ]
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂅 {capacity}%",
+        "format-plugged": "󰂅 {capacity}%",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "custom/power":{
+        "format":"⏻",
+        "on-click":"~/.config/rofi/powermenu/type-1/powermenu.sh",
+        "tooltip": false
     }
 }

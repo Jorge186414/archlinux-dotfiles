@@ -1,98 +1,56 @@
+@import '../../.cache/wal/colors-waybar.css';
+
 /* --- Global Styles --- */
 * {
-    font-family:
-    "Monaspace Argon NF", "SF Pro Text", "Inter",
-    "Segoe UI, NotoSans Nerd Font", sans-serif;
+    font-family: "JetBrains Mono Nerd Font";
     font-size: 14px;
-    color: #dadada;
+    color: @color13;
 }
 
 #waybar {
     background: transparent;
     border-radius: 6px;
 }
-#workspaces{
-    border-radius:6px;
-}
 
-#workspaces,
-#mpris,
-#clock,
-#custom-notification,
-#idle_inhibitor,
-#network,
-#bluetooth,
-#backlight,
-#wireplumber,
-#power-profiles-daemon,
-#battery{
-    margin-left:4px;
-    margin-right: 4px;
-    background: #5c5f77;
-    border-radius:6px 6px 6px 6px;
-    padding-left:12px;
-    padding-right: 12px;
-}
-
-/*
-#backlight,
-#bluetooth{
-    border-radius:0px;
-    margin-left: 0px;
-    margin-right: 0px;
-
-}*/
-
-#network{
-    border-radius: 6px 0px 0px 6px;
-    margin-right: 0px;
-    color: #89b4fa;
-}
-
-#bluetooth{
-    border-radius: 0px;
-    margin-right: 0px;
-    margin-left: -4px;
-}
-
-#backlight{
-    border-radius: 0px;
-    margin-right: 0px;
-    margin-left: -4px;
-}
-
-#wireplumber{
-    border-radius: 0px 6px 6px 0px;
-    margin-left: -4px;
-}
-
-#idle_inhibitor.activated{
-    color:#e57474;
-}
-
-#custom-power{
-color:#c47fd5;
-margin-right:10px;
-padding-right:14px;
+/*----- Workspaces Style -----*/
+#workspaces {
+    background: @background;
+    border-radius: 7px;
+    margin-right: 6px;
 }
 
 #workspaces button {
-    padding: 0 5px;
-    background-color: transparent;
-    color: #ffffff;
+    border-radius: 20px;
+    padding-left: 3px;
+    padding-right: 3px;
+    animation: gradient_f 20s ease-in infinite;
+    transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
+}
+
+#workspaces button.active {
+    background: alpha(@color4, 0.3);
+    color: @color0;
+    border-radius: 20px;
+    transition: color 0.5s;
+    padding-left: 16px;
+    padding-right: 16px;
+    animation: gradient_f 20s ease-in infinite;
+    transition: all 0.8s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
 
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: @color4;
+    color: @color0;
 }
 
 #workspaces button.focused {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
+    color: @color5;
+    background: transparent;
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    color: @background;
+    background-color: @color13;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -105,19 +63,66 @@ padding-right:14px;
     margin-right: 0;
 }
 
-#battery.charging, #battery.plugged {
-    color: #ffffff;
-    background-color: #26A65B;
+/*----- modules Style -----*/
+#mpris,
+#custom-notification,
+#network,
+#bluetooth,
+#backlight,
+#wireplumber,
+#clock,
+#power-profiles-daemon,
+#battery,
+#custom-power{
+    background: @background;
+    border-radius: 7px;
+    padding-left:10px;
+    padding-right: 10px;
 }
 
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
+/*----- custom-notification module Style -----*/
+#custom-notification{
+    margin-right: 6px;
 }
 
-/* Using steps() instead of linear as a timing function to limit cpu usage */
+/*----- network module Style -----*/
+#network{
+    border-radius: 7px 0px 0px 7px;
+}
+
+/*----- bluetooth module Style -----*/
+#bluetooth{
+    border-radius: 0px 7px 7px 0px;
+    margin-right: 6px;
+}
+
+/*----- backlight module Style -----*/
+#backlight{
+    border-radius: 7px 0px 0px 7px;
+}
+
+/*----- wireplumber module Style -----*/
+#wireplumber{
+    border-radius: 0px 7px 7px 0px;
+    margin-right: 6px;
+}
+
+/*----- clock module Style -----*/
+#clock{
+    border-radius: 6px;
+    margin-right: 6px;
+}
+
+/*----- powe-profiles-daemon module Style -----*/
+#power-profiles-daemon{
+    border-radius: 7px 0px 0px 7px;
+}
+
+/*----- battery module Style -----*/
+#battery{
+    border-radius: 0px 0px 0px 0px;
+}
+
 #battery.critical:not(.charging) {
     background-color: #f53c3c;
     color: #ffffff;
@@ -128,32 +133,14 @@ padding-right:14px;
     animation-direction: alternate;
 }
 
-
-#power-profiles-daemon.performance {
-    color: #f38ba8;
+/*----- custom-power module Style -----*/
+#custom-power{
+    border-radius: 0px 7px 7px 0px;
 }
 
-#power-profiles-daemon.balanced {
-    color: #2980b9;
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
 }
-
-#power-profiles-daemon.power-saver {
-    color: #2ecc71;
-}
-
-#network.disconnected {
-    background-color: #f53c3c;
-}
-
-/* --- Tooltip Styles --- */
-tooltip {
-    background-color: #0d0f1a;
-    color: #b8c5db;
-    padding: 5px 12px;
-    margin: 5px 0px;
-    border-radius: 6px;
-    border: 1px solid rgba(122, 156, 198, 0.15);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    font-size: 12px;
-}
-
