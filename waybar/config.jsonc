@@ -4,12 +4,12 @@
     "position": "top",
     "height": 30,
     "reload_style_on_change": true,
-    "margin-bottom": 5,
+    "margin-top": 5,
     "margin-left": 5,
     "margin-right": 5,
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces", "mpris"],
-    "modules-center": [],
+    "modules-center": ["custom/menu"],
     "modules-right":[
         "custom/notification",
         "network", "bluetooth",
@@ -47,6 +47,16 @@
             "spotify": " "
         }
     }, // End of custom/mpris module
+
+    "custom/menu": {
+        "format": "󰣇",
+        "exec": "echo ; echo 󱓟 app launcher",
+        "interval" : 86400, // once every day
+        "tooltip": true,
+        "on-click": "~/.config/rofi/launchers/type-1/launcher.sh",
+        "on-click-middle": "~/.config/hypr/scripts/wallpaperSelect.sh",
+        "on-click-right": "~/.config/hypr/scripts/WaybarLayout.sh"
+    },
 
     "custom/notification":{
         "format": "󱅫",
