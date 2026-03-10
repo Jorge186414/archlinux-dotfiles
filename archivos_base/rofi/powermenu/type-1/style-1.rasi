@@ -13,7 +13,7 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@import                          "shared/colors.rasi"
+@import ".cache/wal/colors-rofi-dark.rasi"
 @import                          "shared/fonts.rasi"
 
 /*****----- Main Window -----*****/
@@ -33,7 +33,6 @@ window {
     padding:                     0px;
     border:                      0px solid;
     border-radius:               12px;
-    border-color:                @selected;
     cursor:                      "default";
     background-color:            @background;
 }
@@ -46,7 +45,6 @@ mainbox {
     padding:                     20px;
     border:                      0px solid;
     border-radius:               0px;
-    border-color:                @selected;
     background-color:            transparent;
     children:                    [ "inputbar", "message", "listview" ];
 }
@@ -59,7 +57,6 @@ inputbar {
     padding:                     0px;
     border:                      0px;
     border-radius:               0px;
-    border-color:                @selected;
     background-color:            transparent;
     text-color:                  @foreground;
     children:                    [ "textbox-prompt-colon", "prompt"];
@@ -71,14 +68,16 @@ textbox-prompt-colon {
     str:                         "";
     padding:                     10px 14px;
     border-radius:               10px;
-    background-color:            @urgent;
+    /** boton/simbolo apagado **/
+    background-color:            @selected-urgent-background;
     text-color:                  @background;
 }
 prompt {
     enabled:                     true;
     padding:                     10px;
     border-radius:               10px;
-    background-color:            @active;
+    /** Mensaja despedidad **/
+    background-color:            @selected-active-background;
     text-color:                  @background;
 }
 
@@ -87,10 +86,10 @@ message {
     enabled:                     true;
     margin:                      0px;
     padding:                     10px;
-    border:                      0px solid;
+    border:                      1px solid;
     border-radius:               10px;
-    border-color:                @selected;
-    background-color:            @background-alt;
+    /** tiempo de uso **/
+    border-color:                @selected-normal-background;
     text-color:                  @foreground;
 }
 textbox {
@@ -106,7 +105,6 @@ error-message {
     padding:                     10px;
     border:                      0px solid;
     border-radius:               0px;
-    border-color:                @selected;
     background-color:            @background;
     text-color:                  @foreground;
 }
@@ -129,7 +127,6 @@ listview {
     padding:                     0px;
     border:                      0px solid;
     border-radius:               0px;
-    border-color:                @selected;
     background-color:            transparent;
     text-color:                  @foreground;
     cursor:                      "default";
@@ -143,7 +140,6 @@ element {
     padding:                     10px;
     border:                      0px solid;
     border-radius:               10px;
-    border-color:                @selected;
     background-color:            transparent;
     text-color:                  @foreground;
     cursor:                      pointer;
@@ -156,6 +152,5 @@ element-text {
     horizontal-align:            0.0;
 }
 element selected.normal {
-    background-color:            var(selected);
     text-color:                  var(background);
 }

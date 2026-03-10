@@ -15,7 +15,8 @@ theme='style-1'
 
 # CMDs
 uptime="`uptime -p | sed -e 's/up //g'`"
-host=`hostname`
+host=`cat /etc/hostname`
+user=`whoami`
 
 # Options
 shutdown=' Shutdown'
@@ -29,7 +30,7 @@ no=' No'
 # Rofi CMD
 rofi_cmd() {
 	rofi -dmenu \
-		-p "$host" \
+		-p "Goodbye ${user}" \
 		-mesg "Uptime: $uptime" \
 		-theme ${dir}/${theme}.rasi
 }
@@ -95,11 +96,7 @@ case ${chosen} in
 		run_cmd --reboot
         ;;
     $lock)
-		if [[ -x '/usr/bin/betterlockscreen' ]]; then
-			betterlockscreen -l
-		elif [[ -x '/usr/bin/i3lock' ]]; then
-			i3lock
-		fi
+		hyprlock
         ;;
     $suspend)
 		run_cmd --suspend
