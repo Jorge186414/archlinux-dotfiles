@@ -1,0 +1,147 @@
+@import '../../.cache/wal/colors-waybar.css';
+
+/* --- Global Styles --- */
+* {
+    font-family: "JetBrains Mono Nerd Font";
+    font-size: 14px;
+    color: @color13;
+}
+
+#waybar {
+    background: transparent;
+    border-radius: 6px;
+}
+
+/*----- Workspaces Style -----*/
+#workspaces {
+    background: @background;
+    border-radius: 7px;
+    margin-right: 6px;
+}
+
+#workspaces button {
+    border-radius: 20px;
+    padding-left: 3px;
+    padding-right: 3px;
+    animation: gradient_f 20s ease-in infinite;
+    transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
+}
+
+#workspaces button.active {
+    background: alpha(@color4, 0.3);
+    color: @color0;
+    border-radius: 20px;
+    transition: color 0.5s;
+    padding-left: 16px;
+    padding-right: 16px;
+    animation: gradient_f 20s ease-in infinite;
+    transition: all 0.8s cubic-bezier(0.55, -0.68, 0.48, 1.682);
+}
+
+#workspaces button:hover {
+    background: @color4;
+    color: @color0;
+}
+
+#workspaces button.focused {
+    color: @color5;
+    background: transparent;
+}
+
+#workspaces button.urgent {
+    color: @background;
+    background-color: @color13;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+/*----- modules Style -----*/
+#mpris,
+#custom-menu,
+#custom-notification,
+#network,
+#bluetooth,
+#backlight,
+#wireplumber,
+#clock,
+#power-profiles-daemon,
+#battery,
+#custom-power{
+    background: @background;
+    border-radius: 7px;
+    padding-left:10px;
+    padding-right: 10px;
+}
+
+/*----- custom-notification module Style -----*/
+#custom-notification{
+    margin-right: 6px;
+}
+
+/*----- network module Style -----*/
+#network{
+    border-radius: 7px 0px 0px 7px;
+}
+
+/*----- bluetooth module Style -----*/
+#bluetooth{
+    border-radius: 0px 7px 7px 0px;
+    margin-right: 6px;
+}
+
+/*----- backlight module Style -----*/
+#backlight{
+    border-radius: 7px 0px 0px 7px;
+}
+
+/*----- wireplumber module Style -----*/
+#wireplumber{
+    border-radius: 0px 7px 7px 0px;
+    margin-right: 6px;
+}
+
+/*----- clock module Style -----*/
+#clock{
+    border-radius: 6px;
+    margin-right: 6px;
+}
+
+/*----- powe-profiles-daemon module Style -----*/
+#power-profiles-daemon{
+    border-radius: 7px 0px 0px 7px;
+}
+
+/*----- battery module Style -----*/
+#battery{
+    border-radius: 0px 0px 0px 0px;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/*----- custom-power module Style -----*/
+#custom-power{
+    border-radius: 0px 7px 7px 0px;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}

@@ -1,0 +1,147 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "reload_style_on_change": true,
+    "margin-top": 5,
+    "margin-left": 5,
+    "margin-right": 5,
+    // Choose the order of the modules
+    "modules-left": ["hyprland/workspaces", "mpris"],
+    "modules-center": ["custom/menu"],
+    "modules-right":[
+        "custom/notification",
+        "network", "bluetooth",
+		"backlight", "wireplumber",
+        "clock",
+		"power-profiles-daemon", "battery", "custom/power"
+        ],
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "warp-on-scroll": false,
+        "all-outputs": true,
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        },
+        "format": "{icon}",
+        "on-click": "activate",
+        "format-icons": {
+        "default": "󰫣",
+        "active": "󰫢"
+		}
+	}, // End hyprland/workspaces module
+
+    "mpris": {
+        "format": "{player_icon}{artist} - {title}",
+        "format-paused": "{player_icon}{artist} - {title}",
+        "tooltip-format": "{player_icon}{artist} - {title} - {position}",
+        "interval": 1,
+        "max-length": 40,
+        "player-icons": {
+            "spotify": " "
+        }
+    }, // End of custom/mpris module
+
+    "custom/menu": {
+        "format": "󰣇",
+        "exec": "echo ; echo 󱓟 app launcher",
+        "interval" : 86400, // once every day
+        "tooltip": true,
+        "on-click": "~/.config/rofi/launchers/type-1/launcher.sh",
+        "on-click-middle": "~/.config/hypr/scripts/wallpaperSelect.sh",
+        "on-click-right": "~/.config/hypr/scripts/WaybarLayout.sh"
+    },
+
+    "custom/notification":{
+        "format": "󱅫",
+        "on-click": "swaync-client -t -sw",
+        "tooltip" :false
+    },
+
+    "network": {
+		"format-wifi": " {essid}",
+		"format-ethernet": "{ipaddr}/{cidr}",
+		"format-linked": "{ifname} (No IP)",
+		"format-disconnected": "󰖪",
+        "on-click": "exec ~/.config/rofi/assets/wifimenu --rofi -s",
+        "tooltip-format":"Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signalStrength}%</b>\nInterface: <b>{ifname}</b>"	
+    },
+
+    "bluetooth": {
+		"format": "",
+		"format-disabled": "󰂲",
+		"format-connected": "󰂱",
+		"on-click": "blueman-manager &"
+	},
+
+    "backlight": {
+        "device": "intel_backlight",
+		"format": "󱩖 {percent}%",
+        "format-icons": ["󰃞", "󰃠"],
+        "tooltip" :false
+    },
+
+    "wireplumber": {
+        "on-click": "pavucontrol",
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": " ",
+            "headset": "",
+            "phone": "",
+            "portable": " ",
+            "car": " ",
+            "default": [" ", " ", " "]
+        },
+        "tooltip" :false
+    },
+
+    "clock": {
+        "format": "󰥔 {:%H:%M   %d %B}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"calendar": {
+			"format": {
+				"months": "<span color='#ffead3'><b>{}</b></span>",
+				"weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+				"today": "<span color='#ffcc66'><b><u>{}</u></b></span>"
+			}
+		}
+    },
+
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "format-icons": {
+            "default": "󱐋",
+            "performance": "󱐋",
+            "balanced": "",
+            "power-saver": ""
+        },
+        "tooltip": false
+    },
+
+    "battery": {
+        "interval": 2,
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂅 {capacity}%",
+        "format-plugged": "󰂅 {capacity}%",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "custom/power":{
+        "format":"⏻",
+        "on-click":"~/.config/rofi/powermenu/type-1/powermenu.sh",
+        "tooltip": false
+    }
+}
